@@ -57,6 +57,7 @@ public class Main {
     	    System.out.println("Do you want to continue:\nEnter Yes or No");
     	    option =sc.next();
     	}while(option.equalsIgnoreCase("yes"));
+    	System.out.println("Thank you for using our system...");
     	}
     	catch(InputMismatchException e)
     	{

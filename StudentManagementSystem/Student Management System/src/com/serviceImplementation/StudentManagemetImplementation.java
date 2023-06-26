@@ -140,7 +140,7 @@ public class StudentManagemetImplementation  implements StudentManagement
 		{
 			throw new NotFoundException("List is empty");
 		}
-    	int count=0; 
+    	 
 		System.out.println("Student name\tId\tGrade\tCorse Id\tCourse name");
 		boolean isPresent=false;
 		Iterator<Student> i=arr.iterator();
