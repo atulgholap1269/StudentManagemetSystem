@@ -45,7 +45,7 @@ public class StudentManagemetImplementation  implements StudentManagement
 	public void listStudent() {
 		if(arr.isEmpty())
 		{
-			throw new NotFoundException();
+			throw new NotFoundException("list is empty");
 		}
 		else
 		{
@@ -62,60 +62,87 @@ public class StudentManagemetImplementation  implements StudentManagement
 	@Override
 	public void displayStudentByCourse(String name) {
 		
+		if (arr.isEmpty()) 
+		{
+			throw new NotFoundException("list is empty");
+		}
 		Iterator<Student> itr =arr.iterator();
 		System.out.println("Student name\tId\tGrade\tCorse Id\tCourse name");
+		boolean isPresent =false;
 		while(itr.hasNext())
 		{
-			if(arr.contains(name))
-			{
-			  Student s=itr.next();
-			
-			  if(s.getC().getCname().equalsIgnoreCase(name))
+			 Student s=itr.next();
+			 if(s.getC().getCname().equalsIgnoreCase(name))
 			   {
-				System.out.println(s.getSname()+"\t\t" +s.getSid()+"\t"+s.getGrade()+"\t"+s.getC().getCid()+"\t\t"+s.getC().getCname());	
+				  isPresent =true;
 			   }
-			}
-			else
-			{
-				throw new NotFoundException();
-			}
+			  
 		}
-	
-	}
-
-    @Override
-	public void removeStudent(int id) 
-	{
-		if(arr.isEmpty())
+		if(isPresent==true)
 		{
-			 throw new NotFoundException();
+		  Iterator<Student> itr1 =arr.iterator();
+		  while(itr.hasNext())
+		   {
+			 Student s=itr.next();
+			 if(s.getC().getCname().equalsIgnoreCase(name))
+			   {
+				 System.out.println(s.getSname()+"\t\t" +s.getSid()+"\t"+s.getGrade()+"\t"+s.getC().getCid()+"\t\t"+s.getC().getCname());
+			   }
+		   }
 		}
 		else
 		{
-		Iterator<Student> i=arr.iterator();
-		 
-		  while(i.hasNext())
-		  {
-			
-			  Student s1=i.next();
-			  if(s1.getSid()==id)
-			   {
-				arr.remove(s1);
-				System.out.println("Student remove from system");
-				return;
-			   }
-			
-		   }
+			throw new NotFoundException("Corse name is not present in list");
 		}
-			
-		
-		
+	}
+
+    @Override
+	public void removeStudent(int id) {
+		if (arr.isEmpty()) 
+		{
+			throw new NotFoundException("list is empty");
+		} 
+		else
+		{
+			Iterator<Student> i = arr.iterator();
+			boolean isPresent = false;
+
+			while (i.hasNext()) {
+
+				Student s1 = i.next();
+				if (s1.getSid() == id) {
+					isPresent = true;
+				}
+			}
+
+			if (isPresent == true) {
+				Iterator<Student> itr = arr.iterator();
+				while (itr.hasNext()) {
+					Student s1 = itr.next();
+					if (s1.getSid() == id) {
+						itr.remove();
+						System.out.println("Student remove from system");
+					}
+
+				}
+			} 
+			else 
+			{
+				throw new NotFoundException("Id is not present in system");
+			}
+
+		}
 	}
 
     @Override
 	public void searchStudent(String s) {
+    	if (arr.isEmpty()) 
+		{
+			throw new NotFoundException("List is empty");
+		}
     	int count=0; 
 		System.out.println("Student name\tId\tGrade\tCorse Id\tCourse name");
+		boolean isPresent=false;
 		Iterator<Student> i=arr.iterator();
 	    while(i.hasNext())
 	    {
@@ -124,20 +151,40 @@ public class StudentManagemetImplementation  implements StudentManagement
 	    	String c1=s.toLowerCase();
 	    	int l=c1.length();
 	    	String c2=s1.getSname().toLowerCase();
-	    	if(c2.substring(0,l-1).equals(c1.substring(0,l-1)))
+	    	if(c2.substring(0,l/2).equals(c1.substring(0,l/2)))
+	    	{
+	    		isPresent=true;
+	    	}
+	    
+	    }
+	    if(isPresent==true)
+	    {
+	    	Iterator<Student> ite=arr.iterator();
+            Student s1=i.next();
+	    	
+	    	String c1=s.toLowerCase();
+	    	int l=c1.length();
+	    	String c2=s1.getSname().toLowerCase();
+	    	if(c2.substring(0,l/2).equals(c1.substring(0,l/2)))
 	    	{
 	    		System.out.println(s1.getSname()+"\t\t" +s1.getSid()+"\t"+s1.getGrade()+"\t"+s1.getC().getCid()+"\t\t"+s1.getC().getCname());
-	    	}
-	    	
-		    
-		
+	    	}  
 	    }
+	    else
+	    {
+	    	throw new NotFoundException("Student name is not present in system");
+	    }
+	    
 	  
 	}
 
 	@Override
 	public void displayAllStudentByCourse() {
 		
+		if (arr.isEmpty()) 
+		{
+			throw new NotFoundException("List is empty");
+		}
 		HashMap<String, ArrayList<Student>> hs=new HashMap<>();
 		Iterator<Student> itr=arr.iterator();
 		

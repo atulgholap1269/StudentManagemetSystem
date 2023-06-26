@@ -36,13 +36,20 @@ public class StudentController {
 	     case 3:
 	    	 System.out.println("Enter course name to show all student in that course");
 	    	 String cname=sc.next();
+	    	 try {
 	    	 manage.displayStudentByCourse(cname);
+	    	 }
+	    	 catch(NotFoundException e)
+	    	 {
+	    		 System.out.println(e.getMessage());
+	    	 }
 	    	 break;
 	     case 4: 
-	    	 System.out.println("Enter student id that you want remove");
-	    	 int id=sc.nextInt();
+	    	
 	    	 try
 	    	 {
+	    		 System.out.println("Enter student id that you want remove");
+		    	 int id=sc.nextInt();
 	    		 manage.removeStudent(id);
 	    	}
 	    	catch(NotFoundException e)
@@ -51,10 +58,11 @@ public class StudentController {
 	    	 }
 	    	 break;
 	     case 5:
-   	    	 System.out.println("Enter student name you want search");
-	    	 String s1=sc.next();
+   	    	 
 	    	 try
 	    	 {
+	    		 System.out.println("Enter student name you want search");
+		    	 String s1=sc.next();
 	    		 manage.searchStudent(s1);
 	    	 }
 	    	 catch(NotFoundException e)
