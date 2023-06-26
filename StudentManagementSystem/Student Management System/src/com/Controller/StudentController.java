@@ -24,7 +24,14 @@ public class StudentController {
 	        manage.addStudent(); 
 	        break;
 	     case 2:
-	    	 manage.listStudent();
+	    	 try {
+	    		 manage.listStudent();
+	    	 }
+	    	catch(NotFoundException e)
+	    	 {
+	    		System.out.println(e.getMessage());
+	    	 }
+    	
 	    	 break;
 	     case 3:
 	    	 System.out.println("Enter course name to show all student in that course");
@@ -56,7 +63,9 @@ public class StudentController {
 	    	 }
 	    	 break;
 	    case 6:
+	    	
 	    	manage.displayAllStudentByCourse();
+	    
 	    	break;
 	     default:
 	    	 System.out.println("Invalid choice. Please try again");

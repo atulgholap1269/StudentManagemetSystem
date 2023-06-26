@@ -43,6 +43,12 @@ public class StudentManagemetImplementation  implements StudentManagement
 
 	@Override
 	public void listStudent() {
+		if(arr.isEmpty())
+		{
+			throw new NotFoundException();
+		}
+		else
+		{
 		System.out.println("Student name\tId\tGrade\tCorse Id\tCourse name");
 		for(Student s1:arr)
 		{
@@ -50,12 +56,13 @@ public class StudentManagemetImplementation  implements StudentManagement
 		System.out.println(s1.getSname()+"\t\t" +s1.getSid()+"\t"+s1.getGrade()+"\t"+s1.getC().getCid()+"\t\t"+s1.getC().getCname());
 			
 		}
-		
+		}
 	}
 
 	@Override
 	public void displayStudentByCourse(String name) {
-		Iterator<Student> itr=arr.iterator();
+		
+		Iterator<Student> itr =arr.iterator();
 		System.out.println("Student name\tId\tGrade\tCorse Id\tCourse name");
 		while(itr.hasNext())
 		{
@@ -79,12 +86,17 @@ public class StudentManagemetImplementation  implements StudentManagement
     @Override
 	public void removeStudent(int id) 
 	{
-		
-		Iterator<Student> i=arr.iterator();
-		while(i.hasNext())
+		if(arr.isEmpty())
 		{
-			if(arr.contains(id))
-			{
+			 throw new NotFoundException();
+		}
+		else
+		{
+		Iterator<Student> i=arr.iterator();
+		 
+		  while(i.hasNext())
+		  {
+			
 			  Student s1=i.next();
 			  if(s1.getSid()==id)
 			   {
@@ -92,12 +104,11 @@ public class StudentManagemetImplementation  implements StudentManagement
 				System.out.println("Student remove from system");
 				return;
 			   }
-			}
-		  else
-		  {
-		  throw new NotFoundException();
-		  }	
+			
+		   }
 		}
+			
+		
 		
 	}
 
@@ -126,6 +137,7 @@ public class StudentManagemetImplementation  implements StudentManagement
 
 	@Override
 	public void displayAllStudentByCourse() {
+		
 		HashMap<String, ArrayList<Student>> hs=new HashMap<>();
 		Iterator<Student> itr=arr.iterator();
 		
